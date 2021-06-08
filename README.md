@@ -4,7 +4,7 @@ ____
 ### Install everything you need and run
 #### Installation
 ```
-https://github.com/b0shka/vk_face_recognition.git
+git clone https://github.com/b0shka/vk_face_recognition.git
 cd vk_face_recognition
 pip3 install -r requirements.txt
 ```
