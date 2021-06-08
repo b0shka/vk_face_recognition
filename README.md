@@ -24,7 +24,6 @@ python3 ./training_madel.py
 ##### To search for a person by photo, run the file check_photo_in_pickle.py
 ```
 python3 ./check_photo_in_pickle.py
-
 ```
 ### Additionally
 The received id will be stored in a file `users_id.txt`. The downloaded photos will be stored in the `data` folder. And the files created by pickle will be stored in the `pickle_files` folder
