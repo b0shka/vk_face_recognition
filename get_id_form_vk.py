@@ -10,8 +10,8 @@ def get_id_from_vk():
     vk_session.auth()
     vk = vk_session.get_api()
 
-    age = 18
-    age_max = 25
+    age = 19
+    age_max = 20
     city_number = 108
     gender = 1
 
@@ -21,21 +21,21 @@ def get_id_from_vk():
     while age <= age_max:
         month = 1
         while month <= 12:
-            time.sleep(3)
-            z = vk.users.search(count=1000,
+            time.sleep(2)
+            peoples = vk.users.search(count=1000,
                                 fields='id, has_photo',
                                 city=city_number,
                                 sex=gender,
                                 age_from=age,
                                 age_to=age,
                                 birth_month=month)
-            month = month + 1
-            print('[+] Download ID: ' + str(age) + ' age, month ' + str(month) + ' (' + str(z['count']) + ')')
-            for x in z['items']:
-                if x['has_photo'] == 1:
-                    if str(x['id']) + ".pickle" not in users_pickle_list:
-                        file.write(str(x['id']) + '\n')
-        age = age + 1
+            print('[+] Download ID: ' + str(age) + ' age, month ' + str(month) + ' (' + str(peoples['count']) + ')')
+            for i in peoples['items']:
+                if i['has_photo'] == 1:
+                    if str(i['id']) + ".pickle" not in users_pickle_list:
+                        file.write(str(i['id']) + '\n')
+            month += 1
+        age += 1
 
     file.close()
     print('[+] Success')

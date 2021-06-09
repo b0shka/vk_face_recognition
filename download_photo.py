@@ -41,28 +41,33 @@ def get_photo(user_id_):
         count_photo = 0
         for photo in photos:
             count_photo += 1
-            if count_photo < 10:
+            if count_photo <= 10:
                 load_file(count_photo, photo, user_id_)
-    except Exception as ex:
-        print(ex)
+    except Exception as error:
+        print(error)
 
 def main():
-    file = codecs.open(u'users_id.txt', 'r', encoding='utf8')
-    users_pickle_list = os.listdir("pickle_files/")
-    num = 0
-    with open("users_id.txt", "r") as f:
-        a = f.readlines()
-        count_all_id = len(a)
-    for i in file:
-        if str(i[:-1]) + ".pickle" not in users_pickle_list:
-            num += 1
-            print(f"[+] Processing {num}/{count_all_id}")
-            get_photo(i[:-1])
-            count_photo = os.listdir(f"data/{i[:-1]}")
-            if len(count_photo) == 0:
-                os.rmdir(f"data/{i[:-1]}")
+    if not os.path.exists("pickle_files"):
+        os.mkdir("pickle_files")
+    if not os.path.exists("data"):
+        print("[ERROR] Not found dirictory data")
+    else:
+        file = codecs.open(u'users_id.txt', 'r', encoding='utf8')
+        users_pickle_list = os.listdir("pickle_files/")
+        num = 0
+        with open("users_id.txt", "r") as f:
+            a = f.readlines()
+            count_all_id = len(a)
+        for i in file:
+            if str(i[:-1]) + ".pickle" not in users_pickle_list:
+                num += 1
+                print(f"[+] Processing {num}/{count_all_id}")
+                get_photo(i[:-1])
+                count_photo = os.listdir(f"data/{i[:-1]}")
+                if len(count_photo) == 0:
+                    os.rmdir(f"data/{i[:-1]}")
 
-    file.close()
+        file.close()
 
 if __name__ == '__main__':
     main()

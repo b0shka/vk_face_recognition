@@ -9,46 +9,42 @@ def traning_modal_img():
         sys.exit()
 
     folders = os.listdir("data")
+    users_pickle_list = os.listdir("pickle_files/")
 
     for i in folders:
-        known_encodings = []
-        images = os.listdir(f"data/{i}")
+        face_encodings_user = []
         name = i
-        for (j, image) in enumerate(images):
-            try:
-                print(f"[+] Processing image {j+1}/{len(images)}")
+        if str(i) + ".pickle" not in users_pickle_list:
+            print(f"[+] Training {i}")
+            images = os.listdir(f"data/{i}")
+            for (j, image) in enumerate(images):
+                try:
+                    print(f"[+] Processing image {j+1}/{len(images)}")
 
-                img_param = get_param_face(f"data/{i}/{image}")
+                    img = face_recognition.load_image_file(f"data/{i}/{image}")
+                    img_param = face_recognition.face_encodings(img)
 
-                if len(known_encodings) == 0:
-                    known_encodings.append(img_param)
-                else:
-                    for x in range(0, len(known_encodings)):
-                        result_equal = face_recognition.compare_faces([img_param], known_encodings[x])
-                        if result_equal[0]:
-                            known_encodings.append(img_param)
-                            break
-                        else:
-                            break
-            except IndexError:
-                pass
+                    if len(img_param) != 0:
+                        for param in img_param:
+                            face_encodings_user.append(param)
+                except IndexError:
+                    pass
 
-        data = {
-            "name" : name,
-            "encodings" : known_encodings
-        }
+        if len(face_encodings_user) != 0:
+            data = {
+                "name" : name,
+                "encodings" : face_encodings_user
+            }
 
-        with open(f"pickle_files/{name}.pickle", "wb") as file:
-            file.write(pickle.dumps(data))
+            with open(f"pickle_files/{name}.pickle", "wb") as file:
+                file.write(pickle.dumps(data))
 
-        print(f"[INFO] File {name}.pickle successfully created")
-
-
-def get_param_face(img_path):
-    img = face_recognition.load_image_file(img_path)
-    img_param = face_recognition.face_encodings(img)[0]
-
-    return img_param
+            print(f"[INFO] File {name}.pickle successfully created\n")
+        else:
+            for photo in os.listdir(f"data/{i}"):
+                os.remove(f"data/{i}/{photo}")
+            os.rmdir(f"data/{i}")
+            print(f"[INFO] In folder data/{i} not found face\n")
 
 def main():
     traning_modal_img()
