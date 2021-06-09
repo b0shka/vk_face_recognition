@@ -2,6 +2,7 @@ import face_recognition
 import pickle
 import os
 import sys
+import h5py
 
 def traning_modal_img():
     if not os.path.exists("data"):
@@ -30,21 +31,25 @@ def traning_modal_img():
                 except IndexError:
                     pass
 
-        if len(face_encodings_user) != 0:
-            data = {
-                "name" : name,
-                "encodings" : face_encodings_user
-            }
+            if len(face_encodings_user) != 0:
+                data = {
+                    "name" : name,
+                    "encodings" : face_encodings_user
+                }
 
-            with open(f"pickle_files/{name}.pickle", "wb") as file:
-                file.write(pickle.dumps(data))
+                # Write to .h5 file
+                '''with h5py.File('data.h5', 'a') as file:
+                    if name not in file.keys():
+                        file.create_dataset(f'{name}', data=face_encodings_user)'''
 
-            print(f"[INFO] File {name}.pickle successfully created\n")
-        else:
-            for photo in os.listdir(f"data/{i}"):
-                os.remove(f"data/{i}/{photo}")
-            os.rmdir(f"data/{i}")
-            print(f"[INFO] In folder data/{i} not found face\n")
+                with open(f"pickle_files/{name}.pickle", "wb") as file:
+                    file.write(pickle.dumps(data))
+                    print(f"[INFO] File {name}.pickle successfully created\n")
+            else:
+                for photo in os.listdir(f"data/{i}"):
+                    os.remove(f"data/{i}/{photo}")
+                os.rmdir(f"data/{i}")
+                print(f"[INFO] In folder data/{i} not found face\n")
 
 def main():
     traning_modal_img()
