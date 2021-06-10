@@ -11,12 +11,13 @@ def traning_modal_img():
 
     folders = os.listdir("data")
     users_pickle_list = os.listdir("pickle_files/")
+    num = 1
 
     for i in folders:
         face_encodings_user = []
         name = i
         if str(i) + ".pickle" not in users_pickle_list:
-            print(f"[+] Training {i}")
+            print(f"[+] Training {i} ({num}/{len(folders)})")
             images = os.listdir(f"data/{i}")
             for (j, image) in enumerate(images):
                 try:
@@ -27,7 +28,15 @@ def traning_modal_img():
 
                     if len(img_param) != 0:
                         for param in img_param:
-                            face_encodings_user.append(param)
+                            #face_encodings_user.append(param)
+
+                            if len(face_encodings_user) == 0:
+                                face_encodings_user.append(param)
+                            else:
+                                for x in range(0, len(face_encodings_user)+1):
+                                    result_equal = face_recognition.compare_faces(param,  face_encodings_user[x])
+                                    if True in face_encodings_user:
+                                        face_encodings_user.append(param)
                 except IndexError:
                     pass
 
@@ -50,6 +59,8 @@ def traning_modal_img():
                     os.remove(f"data/{i}/{photo}")
                 os.rmdir(f"data/{i}")
                 print(f"[INFO] In folder data/{i} not found face\n")
+
+        num += 1
 
 def main():
     traning_modal_img()

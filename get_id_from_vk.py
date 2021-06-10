@@ -28,6 +28,7 @@ def get_id_from_vk():
                 "has_photo": 1
             })
             print('[+] Download ID: ' + str(age_min) + ' age, month ' + str(month) + ' (' + str(info_list['count']) + ')')
+
             for i in info_list['items']:
                 if str(i['id']) + ".pickle" not in users_pickle_list:
                     file.write(str(i['id']) + "\n")

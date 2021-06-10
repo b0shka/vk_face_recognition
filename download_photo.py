@@ -1,5 +1,3 @@
-import shutil
-import os
 import requests
 import vk_api
 from config import *
