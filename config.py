@@ -1,4 +1,3 @@
 import os
 
-login = os.environ['login']
-password = os.environ['password']
+token_vk = os.environ['token_vk']

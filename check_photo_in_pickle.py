@@ -15,7 +15,7 @@ def check_face(img_path):
     img_param = face_recognition.face_encodings(img)[0]
     folders = os.listdir("pickle_files")
     found_count = 0
-    file_data = h5py.File('data.h5', 'r')
+    #file_data = h5py.File('data.h5', 'r')
 
     # Read in .h5 file
     '''for i in file_data.keys():
@@ -37,7 +37,7 @@ def check_face(img_path):
     if found_count == 0:
         print("[-] Not found")
 
-    file_data.close()
+    #file_data.close()
 
 def main():
     check_face("img.jpg")
