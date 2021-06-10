@@ -5,7 +5,6 @@ from config import *
 def get_photo(user_id):
     try:
         session = vk_api.VkApi(token=token_vk)
-        os.mkdir(f"data/{user_id}")
 
         request_result = session.method("photos.getAll", {
             "owner_id": user_id,
@@ -22,7 +21,7 @@ def get_photo(user_id):
                 file.write(r.content)
             count_photo += 1
     except Exception as error:
-        print(f"[ERROR] {error}")
+        print(error)
 
 def main():
     if not os.path.exists("pickle_files"):
@@ -31,18 +30,23 @@ def main():
         print("[ERROR] Not found dirictory data")
     else:
         users_pickle_list = os.listdir("pickle_files/")
+        users_data_list = os.listdir("data/")
         with open("users_id.txt", "r") as f:
             count_all_id = len(f.readlines())
         num = 0
         file = open('users_id.txt', 'r')
         for i in file:
-            if str(i[:-1]) + ".pickle" not in users_pickle_list:
+            if str(i[:-1]) not in users_data_list:
+                os.mkdir(f"data/{i[:-1]}")
+                if str(i[:-1]) + ".pickle" not in users_pickle_list:
+                    num += 1
+                    print(f"[+] Processing {num}/{count_all_id} ({i[:-1]})")
+                    get_photo(i[:-1])
+                    count_photo = os.listdir(f"data/{i[:-1]}")
+                    if len(count_photo) == 0:
+                        os.rmdir(f"data/{i[:-1]}")
+            else:
                 num += 1
-                print(f"[+] Processing {num}/{count_all_id}")
-                get_photo(i[:-1])
-                count_photo = os.listdir(f"data/{i[:-1]}")
-                if len(count_photo) == 0:
-                    os.rmdir(f"data/{i[:-1]}")
 
         file.close()
         print('[+] Success')

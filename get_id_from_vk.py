@@ -5,9 +5,11 @@ from config import *
 def get_id_from_vk():
     session = vk_api.VkApi(token=token_vk)
     users_pickle_list = os.listdir("pickle_files/")
-    file = open('users_id.txt', 'w')
+    file = open('users_id.txt', 'a')
+    with open('users_id.txt', 'r') as f:
+        all_id = f.readlines()
 
-    city = "City"
+    city = "Пермь"
     count_result = 1000
     gender = 1
     age_min = 19
@@ -30,8 +32,9 @@ def get_id_from_vk():
             print('[+] Download ID: ' + str(age_min) + ' age, month ' + str(month) + ' (' + str(info_list['count']) + ')')
 
             for i in info_list['items']:
-                if str(i['id']) + ".pickle" not in users_pickle_list:
-                    file.write(str(i['id']) + "\n")
+                if str(i['id']) + '\n' not in all_id:
+                    if str(i['id']) + ".pickle" not in users_pickle_list:
+                        file.write(str(i['id']) + "\n")
 
             month += 1
         age_min += 1

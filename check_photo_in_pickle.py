@@ -27,7 +27,8 @@ def check_face(img_path):
             result_equal = face_recognition.compare_faces(data,  param)
 
             if True in result_equal:
-                print(f"[+] Found in {i} (https://vk.com/id{i})")
+                name = session.method("users.get", {"user_ids": data['name']})
+                print(f"[+] Found in https://vk.com/id{data['name']} ({name[0]['first_name']} 
                 found_count += 1'''
 
         for i in folders:

@@ -15,6 +15,7 @@ def traning_modal_img():
 
     for i in folders:
         face_encodings_user = []
+        other_face = []
         name = i
         if str(i) + ".pickle" not in users_pickle_list:
             print(f"[+] Training {i} ({num}/{len(folders)})")
@@ -33,13 +34,48 @@ def traning_modal_img():
                             if len(face_encodings_user) == 0:
                                 face_encodings_user.append(param)
                             else:
-                                for x in range(0, len(face_encodings_user)+1):
-                                    result_equal = face_recognition.compare_faces(param,  face_encodings_user[x])
-                                    if True in face_encodings_user:
-                                        face_encodings_user.append(param)
-                except IndexError:
-                    pass
+                                for x in range(0, len(face_encodings_user)):
+                                    result_equal = face_recognition.compare_faces([param], face_encodings_user[x])
 
+                                    if True in result_equal:
+                                        face_encodings_user.append(param)
+                                        break
+                                    else:
+                                        other_face.append(param)
+                                        break
+                except IndexError as error:
+                    pass
+            print(len(face_encodings_user), len(other_face))
+            if len(other_face) != 0:
+                while True:
+                    new_equal_face = []
+                    new_other_face = []
+                    for i in other_face:
+                        if len(new_equal_face) == 0:
+                            new_equal_face.append(i)
+                        else:
+                            for x in range(0, len(new_equal_face)):
+                                result_equal = face_recognition.compare_faces([i], new_equal_face[x])
+
+                                if True in result_equal:
+                                    new_equal_face.append(i)
+                                    break
+                                else:
+                                    new_other_face.append(i)
+                                    break
+
+                    if len(new_equal_face) > len(face_encodings_user):
+                        face_encodings_user = new_equal_face
+                        print('good', len(new_equal_face))
+                        break
+                    else:
+                        if len(new_other_face) == 0 or len(new_other_face) < len(face_encodings_user):
+                            break
+                        else:
+                            other_face = new_other_face
+                            print('again', len(other_face))
+
+            print(len(face_encodings_user))
             if len(face_encodings_user) != 0:
                 data = {
                     "name" : name,
