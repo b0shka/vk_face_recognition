@@ -9,18 +9,7 @@ cd vk_face_recognition
 pip3 install -r requirements.txt
 ```
 #### Run
-##### To get the user id, run the file get_id_from_vk.py
-```
-python3 ./get_id_from_vk.py
-```
-##### To download photos from accounts by id, run the file download_photo.py
-```
-python3 ./download_photo.py
-```
-##### To get the face parameters and create it .pickle file run the file training_madel.py
-```
-python3 ./training_madel.py
-```
+
 ##### To search for a person by photo, run the file check_photo_in_pickle.py
 ```
 python3 ./check_photo_in_pickle.py
