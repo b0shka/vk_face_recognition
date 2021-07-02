@@ -1,13 +1,13 @@
 import face_recognition
 import pickle
 import sys
+import os
 import h5py
 import vk_api
-from config import *
 
-def check_face(img_path):
+def find_face(img_path):
     print("[+] Searching...")
-    session = vk_api.VkApi(token=token_vk)
+    session = vk_api.VkApi(token=os.environ['token_vk'])
 
     if not os.path.exists("pickle_files"):
         print("[ERROR] Not found dirictory pickle_files")
@@ -28,7 +28,7 @@ def check_face(img_path):
 
             if True in result_equal:
                 name = session.method("users.get", {"user_ids": data['name']})
-                print(f"[+] Found in https://vk.com/id{data['name']} ({name[0]['first_name']} 
+                print(f"[+] Found in https://vk.com/id{data['name']} ({name[0]['first_name']}
                 found_count += 1'''
 
         for i in folders:
@@ -44,9 +44,3 @@ def check_face(img_path):
             print("[-] Not found")
 
     #file_data.close()
-
-def main():
-    check_face("img.jpg")
-
-if __name__ == "__main__":
-    main()

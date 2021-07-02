@@ -6,8 +6,9 @@ import os
 import sys
 import h5py
 from photo_recognition import traning_model
+from check_photo_in_pickle import find_face
 
-class Create_database:
+class Database_faces_from_vk:
     def __init__(self):
         self.session = vk_api.VkApi(token=os.environ['token_vk'])
         if not os.path.exists('users_id.txt'):
@@ -66,6 +67,10 @@ class Create_database:
         except Exception as error:
             print(f'[ERROR] (download_photo) {error}\n')
 
+        
+    def find_people_from_db(self, url_photo):
+        find_face(url_photo)
+
 
     def start_create(self, age_min=None, age_max=None, gender=None, city=None):
         try:
@@ -115,5 +120,6 @@ class Create_database:
 
 
 if __name__ == "__main__":
-    create_face_encodings = Create_database()
-    create_face_encodings.start_create(age_min=25, age_max=35, gender=1, city='Moscow')
+    db = Database_faces_from_vk()
+    db.start_create(age_min=25, age_max=35, gender=1, city='Moscow')
+    #db.find_people_from_db('1.jpg')
