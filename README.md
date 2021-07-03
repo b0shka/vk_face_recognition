@@ -5,12 +5,13 @@ Subsequently, it will be possible to search for a person using the created datab
 The program was created based on the `face_recognition` and `vk_api` libraries
 
 [![PyPI](https://img.shields.io/pypi/v/vk_face_recognition)](https://pypi.org/project/vk-face-recognition/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/vk-face-recognition)](https://pypi.org/project/vk-face-recognition/)
 
 ____
 ## Installation
 
 #### Requirements
-* Python 3.7+
+* Python 3.8+
 * Linux, Windows or macOS
 
 #### Installing on Linux or Mac
