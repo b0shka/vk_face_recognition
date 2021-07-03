@@ -5,11 +5,14 @@ import pickle
 import os
 import sys
 import h5py
-from photo_recognition import traning_model
-from search_by_photo import find_face
+from photo_recognition import Traning_model
+from search_by_photo import Find_face
 
 class Recognition_face:
     def __init__(self):
+        self.traning_class = Traning_model()
+        self.find_class = Find_face()
+
         self.session = vk_api.VkApi(token=os.environ['token_vk'])
         if not os.path.exists('users_id.txt'):
             file = open('users_id.txt', 'w')
@@ -69,7 +72,7 @@ class Recognition_face:
 
 
     def find_people_from_db(self, url_photo):
-        find_face(url_photo)
+        self.find_class.find(url_photo)
 
 
     def start_recognition(self, age_min=None, age_max=None, gender=None, city=None):
@@ -95,12 +98,12 @@ class Recognition_face:
                                     count_photo = os.listdir(f"data/{i[:-1]}")
 
                                     if len(count_photo) != 0:
-                                        traning_model(i[:-1])
+                                        self.traning_class.traning(i[:-1])
                             else:
                                 count_photo = os.listdir(f"data/{i[:-1]}")
 
                                 if len(count_photo) != 0:
-                                    traning_model(i[:-1])
+                                    self.traning_class.traning(i[:-1])
 
                             for j in os.listdir(f'data/{i[:-1]}'):
                                 os.remove(f'data/{i[:-1]}/{j}')

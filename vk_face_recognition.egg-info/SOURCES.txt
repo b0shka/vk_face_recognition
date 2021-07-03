@@ -1,0 +1,12 @@
+README.md
+setup.cfg
+setup.py
+vk_face_recognition/__init__.py
+vk_face_recognition/photo_recognition.py
+vk_face_recognition/recognition.py
+vk_face_recognition/search_by_photo.py
+vk_face_recognition.egg-info/PKG-INFO
+vk_face_recognition.egg-info/SOURCES.txt
+vk_face_recognition.egg-info/dependency_links.txt
+vk_face_recognition.egg-info/requires.txt
+vk_face_recognition.egg-info/top_level.txt

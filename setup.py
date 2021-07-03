@@ -5,7 +5,7 @@ with open('README.md', encoding='utf-8') as f:
 
 setup(
       name='vk_face_recognition',
-      version='1.0.0',
+      version='1.0.2',
 
       description='A program for creating a database of face parameters from photos downloaded from VKontakte and searching for it',
 
