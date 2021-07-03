@@ -13,6 +13,7 @@ setup(
       long_description_content_type='text/markdown',
 
       packages=['vk_face_recognition'],
+      install_requires=['vk_api'],
 
       author_email='user.b0shka@gmail.com',
       url='https://github.com/b0shka/vk_face_recognition'

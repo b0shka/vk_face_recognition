@@ -6,9 +6,9 @@ import os
 import sys
 import h5py
 from photo_recognition import traning_model
-from check_photo_in_pickle import find_face
+from search_by_photo import find_face
 
-class Database_faces_vk:
+class Recognition_face:
     def __init__(self):
         self.session = vk_api.VkApi(token=os.environ['token_vk'])
         if not os.path.exists('users_id.txt'):
@@ -72,7 +72,7 @@ class Database_faces_vk:
         find_face(url_photo)
 
 
-    def start_create(self, age_min=None, age_max=None, gender=None, city=None):
+    def start_recognition(self, age_min=None, age_max=None, gender=None, city=None):
         try:
             while age_min <= age_max:
                 month = 1
@@ -110,5 +110,12 @@ class Database_faces_vk:
                 age_min += 1
 
             print('[+] Success')
+        except TypeError:
+            print('[ERROR] Вы указали не все параметры функции\n')
         except Exception as error:
             print(f'[ERROR] (main) {error}\n')
+
+
+
+test = Recognition_face()
+test.start_recognition(age_min=24, age_max=25, gender=1, city='Perm')

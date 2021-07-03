@@ -19,8 +19,6 @@ def traning_model(user_id):
         images = os.listdir(f"data/{user_id}")
         for (i, image) in enumerate(images):
             try:
-                print(f"[+] Processing image {i+1}/{len(images)}")
-
                 img = face_recognition.load_image_file(f"data/{user_id}/{image}")
                 img_param = face_recognition.face_encodings(img)
 
