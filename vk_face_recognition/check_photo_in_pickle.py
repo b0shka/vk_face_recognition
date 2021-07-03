@@ -7,7 +7,6 @@ import vk_api
 
 def find_face(img_path):
     print("[+] Searching...")
-    session = vk_api.VkApi(token=os.environ['token_vk'])
 
     if not os.path.exists("pickle_files"):
         print("[ERROR] Not found dirictory pickle_files")
@@ -36,6 +35,7 @@ def find_face(img_path):
             result_equal = face_recognition.compare_faces(data["encodings"],  param)
 
             if True in result_equal:
+                session = vk_api.VkApi(token=os.environ['token_vk'])
                 name = session.method("users.get", {"user_ids": data['name']})
                 print(f"[+] Found in https://vk.com/id{data['name']} ({name[0]['first_name']} {name[0]['last_name']})")
                 found_count += 1

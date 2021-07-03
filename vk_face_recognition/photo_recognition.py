@@ -38,8 +38,10 @@ def traning_model(user_id):
                                 else:
                                     other_face.append(param)
                                     break
-            except IndexError as error:
+            except IndexError:
                 pass
+            except Exception as error:
+                print(f'[ERROR] (traning_model) {error}\n')
 
         if len(other_face) != 0:
             while True:

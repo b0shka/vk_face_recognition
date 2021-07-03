@@ -8,7 +8,7 @@ import h5py
 from photo_recognition import traning_model
 from check_photo_in_pickle import find_face
 
-class Database_faces_from_vk:
+class Database_faces_vk:
     def __init__(self):
         self.session = vk_api.VkApi(token=os.environ['token_vk'])
         if not os.path.exists('users_id.txt'):
@@ -67,59 +67,48 @@ class Database_faces_from_vk:
         except Exception as error:
             print(f'[ERROR] (download_photo) {error}\n')
 
-        
+
     def find_people_from_db(self, url_photo):
         find_face(url_photo)
 
 
     def start_create(self, age_min=None, age_max=None, gender=None, city=None):
         try:
-            if age_min == None or age_max == None or gender == None or city == None:
-                print('[ERROR] Вы указали не все параметры функции')
-            else:
-                num = 0
-                while age_min <= age_max:
-                    month = 1
-                    while month <= 12:
-                        self.get_id_from_vk(age_min, month, gender, city)
+            while age_min <= age_max:
+                month = 1
+                while month <= 12:
+                    num = 0
+                    self.get_id_from_vk(age_min, month, gender, city)
 
-                        with open('users_id.txt', 'r') as file:
-                            list_id = file.readlines()
-                            count_all_id = len(list_id)
+                    with open('users_id.txt', 'r') as file:
+                        list_id = file.readlines()
+                        count_all_id = len(list_id)
 
-                            for i in list_id:
-                                if str(i[:-1]) not in os.listdir('data/'):
-                                    if str(i[:-1]) not in os.listdir("pickle_files/"):
-                                        os.mkdir(f'data/{i[:-1]}')
-                                        num += 1
-                                        print(f"[+] Processing {num}/{count_all_id} ({i[:-1]})")
+                        for i in list_id:
+                            num += 1
+                            print(f"[+] Processing {num}/{count_all_id} ({i[:-1]})")
+                            if str(i[:-1]) not in os.listdir('data/'):
+                                if str(i[:-1]) not in os.listdir("pickle_files/"):
+                                    os.mkdir(f'data/{i[:-1]}')
 
-                                        self.download_photo(i[:-1])
-                                        count_photo = os.listdir(f"data/{i[:-1]}")
-
-                                        if len(count_photo) != 0:
-                                            traning_model(i[:-1])
-                                    else:
-                                        num += 1
-                                else:
+                                    self.download_photo(i[:-1])
                                     count_photo = os.listdir(f"data/{i[:-1]}")
 
                                     if len(count_photo) != 0:
                                         traning_model(i[:-1])
-                                    
-                                for j in os.listdir(f'data/{i[:-1]}'):
-                                    os.remove(f'data/{i[:-1]}/{j}')
-                                os.rmdir(f'data/{i[:-1]}')
+                            else:
+                                count_photo = os.listdir(f"data/{i[:-1]}")
 
-                        month += 1
-                    age_min += 1
+                                if len(count_photo) != 0:
+                                    traning_model(i[:-1])
 
-                print('[+] Success')
+                            for j in os.listdir(f'data/{i[:-1]}'):
+                                os.remove(f'data/{i[:-1]}/{j}')
+                            os.rmdir(f'data/{i[:-1]}')
+
+                    month += 1
+                age_min += 1
+
+            print('[+] Success')
         except Exception as error:
             print(f'[ERROR] (main) {error}\n')
-
-
-if __name__ == "__main__":
-    db = Database_faces_from_vk()
-    db.start_create(age_min=25, age_max=35, gender=1, city='Moscow')
-    #db.find_people_from_db('1.jpg')
