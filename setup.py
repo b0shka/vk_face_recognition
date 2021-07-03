@@ -1,20 +1,36 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from setuptools import setup
 
-with open('README.md', encoding='utf-8') as f:
-    long_description = f.read()
+with open('README.rst', encoding='utf-8') as readme_file:
+    readme = readme_file.read()
+
+requirements = [
+    'face-recognition==1.3.0',
+    'vk-api==11.9.4'
+]
 
 setup(
-      name='vk_face_recognition',
-      version='1.0.2',
+    name='vk_face_recognition',
+    version='1.0.8',
+    
+    description='Creating a database with biometrics of persons and subsequent search on it',
+    long_description=readme,
+    long_description_content_type='text/markdown',
+    license="MIT license",
 
-      description='A program for creating a database of face parameters from photos downloaded from VKontakte and searching for it',
+    packages=['vk_face_recognition'],
+    install_requires=requirements,
 
-      long_description=long_description,
-      long_description_content_type='text/markdown',
+    author='b0shka',
+    author_email='user.b0shka@gmail.com',
+    url='https://github.com/b0shka/vk_face_recognition',
 
-      packages=['vk_face_recognition'],
-      install_requires=['vk_api'],
-
-      author_email='user.b0shka@gmail.com',
-      url='https://github.com/b0shka/vk_face_recognition'
+    classifiers=[
+		"Programming Language :: Python :: 3.8",
+		'License :: OSI Approved :: MIT License',
+		"Operating System :: OS Independent",
+        'Intended Audience :: Developers',
+	],
 )
