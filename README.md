@@ -10,10 +10,12 @@ pip3 install -r requirements.txt
 ```
 #### Run
 ```
-python3 ./main.py
+cd vk_face_recognition
+python3 ./vk_face_recognition.py
 ```
 ##### To search for a person by photo, run the file check_photo_in_pickle.py
 ```
+cd vk_face_recognition
 python3 ./check_photo_in_pickle.py
 ```
 ### Additionally
