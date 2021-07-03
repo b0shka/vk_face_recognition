@@ -15,6 +15,11 @@ ____
 pip3 install vk_face_recognition
 ```
 
+#### Installing on Windows
+```
+pip install vk_face_recognition
+```
+
 
 ### Usage
 
