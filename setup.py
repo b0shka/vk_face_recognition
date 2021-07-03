@@ -3,7 +3,7 @@
 
 from setuptools import setup
 
-with open('README.rst', encoding='utf-8') as readme_file:
+with open('README.md', encoding='utf-8') as readme_file:
     readme = readme_file.read()
 
 requirements = [
@@ -13,8 +13,8 @@ requirements = [
 
 setup(
     name='vk_face_recognition',
-    version='1.0.8',
-    
+    version='0.1.0',
+
     description='Creating a database with biometrics of persons and subsequent search on it',
     long_description=readme,
     long_description_content_type='text/markdown',
@@ -28,9 +28,9 @@ setup(
     url='https://github.com/b0shka/vk_face_recognition',
 
     classifiers=[
-		"Programming Language :: Python :: 3.8",
-		'License :: OSI Approved :: MIT License',
-		"Operating System :: OS Independent",
-        'Intended Audience :: Developers',
-	],
+        'Programming Language :: Python :: 3.8',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+        'Intended Audience :: Developers'
+    ]
 )

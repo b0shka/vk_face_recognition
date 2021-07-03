@@ -1,10 +1,13 @@
 # vk_face_recognition
-A program for creating a database with human biometrics based on photos. Photos will be automatically downloaded from VKontakte. Subsequently, it will be possible to search for a person using the created database. The program was created based on the `face_recognition` and `vk_api` libraries
+A program for creating a database with human biometrics based on photos. 
+Photos will be automatically downloaded from [VKontakte](https://vk.com). 
+Subsequently, it will be possible to search for a person using the created database. 
+The program was created based on the `face_recognition` and `vk_api` libraries
 
 [![PyPI](https://img.shields.io/pypi/v/vk_face_recognition)](https://pypi.org/project/vk-face-recognition/)
 
 ____
-### Installation
+## Installation
 
 #### Requirements
 * Python 3.7+
@@ -21,10 +24,10 @@ pip install vk_face_recognition
 ```
 
 
-### Usage
+## Usage
 
 #### Initial setup
-To get started, you need to add your token_vk received on the site `https://vkhost.github.io/`, to the file `main.py` to a string
+To get started, you need to add your token_vk received on the [site](https://vkhost.github.io/), to the file `main.py` to a string
 
 ```
 self.session = vk_api.VkApi(token='your_token')
@@ -32,9 +35,9 @@ self.session = vk_api.VkApi(token='your_token')
 
 #### Using the Library
 ```
-from vk_face_recognition import Recognition_face
+from vk_face_recognition import Vk_recognition
 
-vk_recognition = Recognition_face()
+vk_recognition = Vk_recognition()
 vk_recognition.start_recognition(age_min=25, age_max=26, gender=1, city='Moscow')
 ```
 
@@ -44,7 +47,7 @@ When running this code, a file will be created first `users_id.txt` with the use
 After creating the database you need, you can search through the photo in the following way
 
 ```
-from vk_face_recognition import Recognition_face
+from vk_face_recognition import Vk_recognition
 
 search = Recognition_face()
 search.find_people('path to the photo')

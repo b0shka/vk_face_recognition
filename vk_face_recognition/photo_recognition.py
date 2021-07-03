@@ -8,7 +8,6 @@ def recognition(user_id):
         print("[ERROR] Not found dirictory data")
         sys.exit()
 
-    folders = os.listdir("data")
     users_pickle_list = os.listdir("pickle_files/")
     num = 1
 

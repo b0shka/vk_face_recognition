@@ -1,10 +1,10 @@
 import requests
 import vk_api
 import os
-from photo_recognition import recognition
-from search_by_photo import find_face
+from .photo_recognition import recognition
+from .search_by_photo import find_face
 
-class Recognition_face:
+class Vk_recognition:
     def __init__(self):
         self.session = vk_api.VkApi(token=os.environ['token_vk'])
         if not os.path.exists('users_id.txt'):
@@ -111,5 +111,6 @@ class Recognition_face:
         except Exception as error:
             print(f'[ERROR] (start_recognition) {error}\n')
 
-test = Recognition_face()
-test.start_recognition(age_min=24, age_max=25, gender=2, city='Perm')
+
+test = Vk_recognition()
+test.start_recognition(24, 25, 2, 'Perm')
