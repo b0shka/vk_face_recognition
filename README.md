@@ -50,7 +50,7 @@ After creating the database you need, you can search through the photo in the fo
 ```
 from vk_face_recognition import Vk_recognition
 
-search = Recognition_face()
+search = Vk_recognition()
 search.find_people('path to the photo')
 ```
 
