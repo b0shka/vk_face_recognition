@@ -13,7 +13,7 @@ requirements = [
 
 setup(
     name='vk_face_recognition',
-    version='1.1.4',
+    version='1.1.5',
 
     description='Creating a database with biometrics of persons and subsequent search on it',
     long_description=readme,

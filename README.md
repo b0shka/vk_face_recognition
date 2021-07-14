@@ -30,12 +30,12 @@ pip install vk_face_recognition
 #### Initial setup
 To get started, you need to add your token_vk received on the [site](https://vkhost.github.io/), to the file `main.py` to a string
 
-```
+``` python
 self.session = vk_api.VkApi(token='your_token')
 ```
 
 #### Using the Library
-```
+``` python
 from vk_face_recognition import Vk_recognition
 
 vk_recognition = Vk_recognition()
@@ -47,7 +47,7 @@ When running this code, a file will be created first `users_id.txt` with the use
 #### Search by photo
 After creating the database you need, you can search through the photo in the following way
 
-```
+``` python
 from vk_face_recognition import Vk_recognition
 
 search = Vk_recognition()
